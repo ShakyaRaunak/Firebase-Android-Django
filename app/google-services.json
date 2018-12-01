@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "502602884235",
+    "firebase_url": "https://fcm-django-app.firebaseio.com",
+    "project_id": "fcm-django-app",
+    "storage_bucket": "fcm-django-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:502602884235:android:13ac22b17b490f68",
+        "android_client_info": {
+          "package_name": "android.fcmdjango.naradevi.fcm_django_android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "502602884235-tqv6dbelsk0k6viuo5m0keodjtbkodgd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "android.fcmdjango.naradevi.fcm_django_android",
+            "certificate_hash": "92e6db7093a4ecee8052e0602b01930a084ca20a"
+          }
+        },
+        {
+          "client_id": "502602884235-blic8eu9t8ntv9p4bo5dernckkon0p61.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCg9NSvugzXGRKK8kLZKk9PAXGgFrWMUa0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "502602884235-blic8eu9t8ntv9p4bo5dernckkon0p61.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
