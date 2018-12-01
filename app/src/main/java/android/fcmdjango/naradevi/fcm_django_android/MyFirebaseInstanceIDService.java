@@ -1,5 +1,6 @@
 package android.fcmdjango.naradevi.fcm_django_android;
 
+import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.google.firebase.iid.FirebaseInstanceId;
@@ -17,6 +18,12 @@ public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService {
         // manage this apps subscriptions on the server side, send the
         // Instance ID token to your app server.
         // sendRegistrationToServer(refreshedToken);
+
+        storeToken(refreshedToken);
+    }
+
+    private void storeToken(String token) {
+        SharedPrefManager.getInstance(getApplicationContext()).storeToken(token);
     }
 
 }
