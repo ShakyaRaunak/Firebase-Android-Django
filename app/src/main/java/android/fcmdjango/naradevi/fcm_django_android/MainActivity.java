@@ -1,5 +1,6 @@
 package android.fcmdjango.naradevi.fcm_django_android;
 
+import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.ClipData;
 import android.content.ClipboardManager;
@@ -7,6 +8,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.Uri;
+import android.os.AsyncTask;
+import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -24,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private BroadcastReceiver broadcastReceiver;
     private ClipboardManager clipboard;
     private ClipData clipData;
+    GMailSender sender;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +84,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initEmailTokenButton() {
+        sender = new GMailSender("igctest12345@gmail.com", "igc_test_12345");
+
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
+
         recipient_email_editText = findViewById(R.id.recipient_email_editText);
         email_token_button = findViewById(R.id.email_token_button);
         email_token_button.setOnClickListener(new View.OnClickListener() {
@@ -87,9 +97,48 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String recipient_email = recipient_email_editText.getText().toString();
                 String email_content = fcm_registration_id_editText.getText().toString();
-                sendEmail(recipient_email, email_content);
+                // sendEmail(recipient_email, email_content);
+
+                try {
+                    new MyAsyncClass().execute();
+                } catch (Exception ex) {
+                    Toast.makeText(getApplicationContext(), ex.toString(), Toast.LENGTH_SHORT).show();
+                }
             }
         });
+    }
+
+    class MyAsyncClass extends AsyncTask<Void, Void, Void> {
+        ProgressDialog pDialog;
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            try {
+                String email_content = fcm_registration_id_editText.getText().toString();
+
+                // Add subject, Body, your mail Id, and receiver mail Id.
+                sender.sendMail("FCM Token", email_content, "igctest12345@gmail.com", "rkshakya99@gmail.com");
+            } catch (Exception ex) {
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            pDialog = new ProgressDialog(MainActivity.this);
+            pDialog.setMessage("Please wait...");
+            pDialog.show();
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            super.onPostExecute(result);
+
+            pDialog.cancel();
+            Toast.makeText(getApplicationContext(), "Email send", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void sendEmail(String recipient_email, String email_content) {
