@@ -1,5 +1,7 @@
 package android.fcmdjango.naradevi.fcm_django_android;
 
+import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.ClipData;
 import android.content.ClipboardManager;
@@ -7,8 +9,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -80,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initEmailTokenButton() {
-        recipient_email_editText = findViewById(R.id.recipient_email_editText);
+        /*recipient_email_editText = findViewById(R.id.recipient_email_editText);
         email_token_button = findViewById(R.id.email_token_button);
         email_token_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,6 +92,13 @@ public class MainActivity extends AppCompatActivity {
                 String recipient_email = recipient_email_editText.getText().toString();
                 String email_content = fcm_registration_id_editText.getText().toString();
                 sendEmail(recipient_email, email_content);
+            }
+        });*/
+        email_token_button = findViewById(R.id.email_token_button);
+
+        email_token_button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                new SendMail().execute("");
             }
         });
     }
@@ -107,4 +118,44 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+
+    @SuppressLint("StaticFieldLeak")
+    private class SendMail extends AsyncTask<String, Integer, Void> {
+
+        private ProgressDialog progressDialog;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressDialog = ProgressDialog.show(MainActivity.this, "Please wait", "Sending mail", true, false);
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            progressDialog.dismiss();
+        }
+
+        protected Void doInBackground(String... params) {
+            Mail m = new Mail("igctest12345@gmail.com", "igc_test_12345");
+
+            String[] toArr = {"rkshakya99@gmail.com"};
+            m.setTo(toArr);
+            m.setFrom("igctest12345@gmail.com");
+            m.setSubject("This is an email sent using my Mail JavaMail wrapper from an Android device.");
+            m.setBody("Email body.");
+
+            try {
+                if (m.send()) {
+                    Toast.makeText(MainActivity.this, "Email was sent successfully.", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(MainActivity.this, "Email was not sent.", Toast.LENGTH_LONG).show();
+                }
+            } catch (Exception e) {
+                Log.e("MailApp", "Could not send email", e);
+            }
+            return null;
+        }
+    }
+
 }
