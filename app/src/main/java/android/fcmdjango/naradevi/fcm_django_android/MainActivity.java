@@ -93,15 +93,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void sendEmail(String recipient_email, String email_content) {
-        Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
-        emailIntent.setType("message/rfc822");
+        Intent emailIntent = new Intent(Intent.ACTION_SEND);
+        //emailIntent.setType("text/plain");
         emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{recipient_email});
         //emailIntent.setData(Uri.parse("mailto:" + recipient_email));
         emailIntent.putExtra(Intent.EXTRA_SUBJECT, "FCM Token - Micromax");
         emailIntent.putExtra(Intent.EXTRA_TEXT, email_content);
+        emailIntent.setType("message/rfc822");
 
         try {
-            startActivity(Intent.createChooser(emailIntent, "Send email using..."));
+            startActivity(Intent.createChooser(emailIntent, "Choose an Email client :"));
         } catch (android.content.ActivityNotFoundException ex) {
             Toast.makeText(MainActivity.this, "No email clients installed.", Toast.LENGTH_SHORT).show();
         }
