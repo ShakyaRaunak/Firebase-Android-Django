@@ -40,7 +40,8 @@
         android:id="@+id/recipient_email_editText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="textMultiLine" />
+        android:inputType="textMultiLine"
+        android:text="rkshakya99@gmail.com" />
 
     <Button
         android:id="@+id/email_token_button"

@@ -1,5 +1,6 @@
 package android.fcmdjango.naradevi.fcm_django_android;
 
+import android.content.ActivityNotFoundException;
 import android.content.BroadcastReceiver;
 import android.content.ClipData;
 import android.content.ClipboardManager;
@@ -95,15 +96,17 @@ public class MainActivity extends AppCompatActivity {
     private void sendEmail(String recipient_email, String email_content) {
         Intent emailIntent = new Intent(Intent.ACTION_SEND);
         //emailIntent.setType("text/plain");
+        emailIntent.setType("text/html");
         emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{recipient_email});
         //emailIntent.setData(Uri.parse("mailto:" + recipient_email));
         emailIntent.putExtra(Intent.EXTRA_SUBJECT, "FCM Token - Micromax");
         emailIntent.putExtra(Intent.EXTRA_TEXT, email_content);
-        emailIntent.setType("message/rfc822");
+        //emailIntent.setType("message/rfc822");
+        emailIntent.setClassName("com.google.android.gm", "com.google.android.gm.ComposeActivityGmail");
 
         try {
             startActivity(Intent.createChooser(emailIntent, "Choose an Email client :"));
-        } catch (android.content.ActivityNotFoundException ex) {
+        } catch (ActivityNotFoundException ex) {
             Toast.makeText(MainActivity.this, "No email clients installed.", Toast.LENGTH_SHORT).show();
         }
 
