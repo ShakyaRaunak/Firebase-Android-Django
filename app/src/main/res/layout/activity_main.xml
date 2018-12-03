@@ -7,16 +7,16 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <!--
     <TextView
         android:id="@+id/fcm_registration_id_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="@string/fcm_registration_id"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
--->
 
     <EditText
         android:id="@+id/fcm_registration_id_editText"
@@ -26,27 +26,27 @@
 
     <Button
         android:id="@+id/delete_token_button"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Delete token" />
+        android:text="@string/delete_token" />
 
     <Button
         android:id="@+id/copy_token_button"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Copy token" />
+        android:text="@string/copy_token" />
 
     <EditText
         android:id="@+id/recipient_email_editText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textMultiLine"
-        android:text="rkshakya99@gmail.com" />
+        android:text="@string/rkshakya99_gmail_com" />
 
     <Button
         android:id="@+id/email_token_button"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Email token" />
+        android:text="@string/email_token" />
 
 </LinearLayout>

@@ -1,3 +1,8 @@
 <resources>
-    <string name="app_name">fcm-django-android</string>
+    <string name="app_name">Firebase Cloud Messaging</string>
+    <string name="delete_token">Delete token</string>
+    <string name="copy_token">Copy token</string>
+    <string name="rkshakya99_gmail_com">rkshakya99@gmail.com</string>
+    <string name="email_token">Email token</string>
+    <string name="fcm_registration_id">FCM Registration Id:</string>
 </resources>
